@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import AddWord from "./client/addWord";
+import SearchWord from "./client/searchWord";
+import DisplayWord from "./client/displayWord"
+
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    // this.onSubmit = this.onSubmit.bind(this);
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="">
+          <Route exact path="/" component={SearchWord} />
+          <Route exact path="/view" component={DisplayWord} />
+          <Route exact path="/search" component={SearchWord} />
+          <Route path="/add" component={AddWord} />
+        </div>
+    </Router>
     );
-  }
+    // return( <div>{"aaa"}</div>);
+  };
 }
 
 export default App;
