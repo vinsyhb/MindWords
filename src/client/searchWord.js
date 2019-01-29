@@ -1,7 +1,7 @@
 import React from "react";
-import { Input, Button } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
-import { Router, Route } from "react-router-dom";
+import { Input, Button, Form, FormGroup } from 'reactstrap';
+import { Spinner } from 'reactstrap';
+
 import DisplayWord from "./displayWord";
 
 import axios from 'axios';
@@ -11,43 +11,42 @@ class SearchWord extends React.Component {
         this.state = {
             requestWord: "",
             searchCompleted: false,
-            searchResult:[]
+            searchResult:[],
+            searching:false
         }
     }
-    onSearch() {
-        debugger;
+    onSearch(e) {
+        this.setState({searching:true});
         axios.get("https://pricey-rover.glitch.me/getWords?requestWord="+this.state.requestWord)
         .then( (response) => {
-            debugger;
-            this.setState({searchCompleted: true,searchResult:response.data});
-            //Router.history.push('/view');
-            //this.context.history.push("/view");
-        })
+            this.setState({
+                searchCompleted: true,
+                searchResult:response.data,
+                searching: false
+            });
+        });
+        e.preventDefault();
     }
 
     render() {
-        // if( this.state.searchCompleted ) {
-        //     return (
-        //         <Redirect to={
-        //             {   pathname: '/view',
-        //                 state: { 
-        //                     searchResult: this.state.searchResult
-        //                 }
-        //             }} />
-        //     );
-        // }
         return (
-            <div>
-                <Input
-                    type="text"
-                    name="requestWord"
-                    placeholder="Type the word to be searched"
-                    value={this.state.requestWord}
-                    onChange={(e) => this.setState({
-                        requestWord: e.target.value
-                    })}
-                />
-                <Button color="primary" onClick={() => this.onSearch()}>Search</Button>
+            <div className="">
+                <Form onSubmit={(e)=>this.onSearch(e)}>
+                    <FormGroup>
+                        <Input
+                            type="text"
+                            name="requestWord"
+                            placeholder="Type the word to be searched"
+                            value={this.state.requestWord}  
+                            onChange={(e) => this.setState({
+                                requestWord: e.target.value
+                            })}
+                        />
+                        <br/>
+                        <Button color="primary" onClick={(e) => this.onSearch(e)}>Search</Button>
+                    </FormGroup>
+                </Form>
+                {this.state.searching && <Spinner color="secondary" /> }
                 {this.state.searchCompleted && <DisplayWord searchResult={this.state.searchResult} />}
             </div>
         );

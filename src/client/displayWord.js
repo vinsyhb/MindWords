@@ -1,24 +1,41 @@
 import React from "react";
 import { Card, CardTitle, CardText } from 'reactstrap';
+import { Alert, Button } from "reactstrap";
 
 export default class DisplayWord extends React.Component {
     constructor(props) {
         super(props);
     }
-    render() {
+
+    handleDelete(e,wordId) {
         debugger;
-        //const words = this.props.location.state.searchResult.map( ({toremember, meaning, othermeaning},index)=> (
-        const words = this.props.searchResult && this.props.searchResult.map( ({toremember, meaning, othermeaning},index)=> (
-            <div key={index}>
+    }
+
+    render() {
+        const words = this.props.searchResult.length && this.props.searchResult.map( ({toremember, meaning, othermeaning,wordId},index)=> (
+            <div key={wordId}>
                 <Card body>
                     <CardTitle>{toremember}</CardTitle>
                     <CardText>{meaning}</CardText>
-                    <CardText>{othermeaning}</CardText>
+                    <CardText>
+                        {othermeaning}
+                    </CardText>
+                    <Button 
+                        outline
+                        color="danger"
+                        size="sm"
+                        onClick={ (e) => this.handleDelete(e,wordId)}>Delete
+                    </Button>
                 </Card>
             </div>
-        )) || null;
+        )) || 
+        (
+            <Alert color="info">
+                Nothing to display
+            </Alert>
+        );
         return (
-            <div>
+            <div className="display-words">
                 {words}
             </div>
         )

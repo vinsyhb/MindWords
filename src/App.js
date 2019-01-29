@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="">
+        <div className="app">
           <Route exact path="/" component={SearchWord} />
           <Route exact path="/view" component={DisplayWord} />
           <Route exact path="/search" component={SearchWord} />
