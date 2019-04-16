@@ -1,0 +1,11 @@
+{
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
+  "proxies": {
+    "/books": {
+      "origin": "${API_URL}"
+    }
+  }
+}
