@@ -34,7 +34,10 @@ class Mentions extends React.Component {
       link: this.state.mentionUrl
     });
     axios
-      .patch("http://localhost:9000/books/" + this.props.bookId, { mentions })
+      .patch(
+        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
+        { mentions }
+      )
       .then(() => {
         this.setState({ openModal: false });
       });

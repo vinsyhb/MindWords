@@ -20,29 +20,31 @@ class ViewBook extends React.Component {
   componentDidMount() {
     const bookId = this.props.match.params.id;
     const that = this;
-    axios.get("http://localhost:9000/books/" + bookId).then(res => {
-      const {
-        bookName,
-        authorName,
-        startDate,
-        endDate,
-        content,
-        review,
-        mentions,
-        words
-      } = res.data;
-      that.setState({
-        bookName,
-        authorName,
-        startDate,
-        endDate,
-        content,
-        bookId,
-        review,
-        mentions,
-        words
+    axios
+      .get("https://mind-word-apis.herokuapp.com/books/" + bookId)
+      .then(res => {
+        const {
+          bookName,
+          authorName,
+          startDate,
+          endDate,
+          content,
+          review,
+          mentions,
+          words
+        } = res.data;
+        that.setState({
+          bookName,
+          authorName,
+          startDate,
+          endDate,
+          content,
+          bookId,
+          review,
+          mentions,
+          words
+        });
       });
-    });
   }
   render() {
     return (
