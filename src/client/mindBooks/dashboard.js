@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
   handleOpenBook(bookId) {}
   componentDidMount() {
     axios
-      .get("/books")
+      .get("https://mind-word-apis.herokuapp.com/books")
       .then(res => {
         this.setState({
           books: res.data

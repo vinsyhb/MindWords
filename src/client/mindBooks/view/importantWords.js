@@ -39,7 +39,10 @@ class ImportantWords extends React.Component {
       context: this.state.context
     });
     axios
-      .patch("/books/" + this.props.bookId, { words })
+      .patch(
+        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
+        { words }
+      )
       .then(() => this.setState({ openModal: false }));
   }
   render() {

@@ -37,9 +37,12 @@ class Reviews extends React.Component {
   handleAddReview(content) {
     debugger;
     axios
-      .patch("/books/" + this.props.bookId, {
-        review: this.state.reviewContent
-      })
+      .patch(
+        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
+        {
+          review: this.state.reviewContent
+        }
+      )
       .then(() => {
         this.setState({ openModal: false });
       });
