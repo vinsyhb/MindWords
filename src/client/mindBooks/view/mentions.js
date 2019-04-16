@@ -33,9 +33,11 @@ class Mentions extends React.Component {
       name: this.state.mentionName,
       link: this.state.mentionUrl
     });
-    axios.patch("/books/" + this.props.bookId, { mentions }).then(() => {
-      this.setState({ openModal: false });
-    });
+    axios
+      .patch("http://localhost:9000/books/" + this.props.bookId, { mentions })
+      .then(() => {
+        this.setState({ openModal: false });
+      });
   }
   toggleModal() {
     this.setState({ openModal: !this.state.openModal });

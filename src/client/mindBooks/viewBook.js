@@ -20,7 +20,7 @@ class ViewBook extends React.Component {
   componentDidMount() {
     const bookId = this.props.match.params.id;
     const that = this;
-    axios.get("/books/" + bookId).then(res => {
+    axios.get("http://localhost:9000/books/" + bookId).then(res => {
       const {
         bookName,
         authorName,
