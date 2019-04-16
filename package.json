@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server --watch db.json --port 9000",
-    "startDev": "npm-run-all --parallel server client"
+    "start": "npm-run-all --parallel server client"
   },
   "eslintConfig": {
     "extends": "react-app"
