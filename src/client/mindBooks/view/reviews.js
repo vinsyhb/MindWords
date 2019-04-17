@@ -34,7 +34,6 @@ class Reviews extends React.Component {
   handleEditClick() {
     this.setState({ openModal: true });
   }
-  compo;
   handleAddReview(content) {
     let payLoad = { ...this.props };
     payLoad.review = this.state.reviewContent;
@@ -79,7 +78,7 @@ class Reviews extends React.Component {
                 type="textarea"
                 placeholder="Write your review here."
                 rows={5}
-                value={this.props.review}
+                value={this.state.reviewContent || this.props.review}
                 onChange={e => this.setState({ reviewContent: e.target.value })}
               />
             </ModalBody>
