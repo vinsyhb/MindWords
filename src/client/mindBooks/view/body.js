@@ -2,7 +2,7 @@ import React from "react";
 import Reviews from "./reviews";
 import Mentions from "./mentions";
 import ImportsWords from "./importantWords";
-
+import Characters from "./characters";
 class ViewBody extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +16,9 @@ class ViewBody extends React.Component {
         {/* Reviews */}
         <div className="margin10">
           <Reviews {...this.props} />
+        </div>
+        <div className="margin10">
+          <Characters {...this.props} />
         </div>
         {/* Mentions */}
         <div className="margin10">

@@ -14,6 +14,7 @@ class ViewBook extends React.Component {
       endDate: "",
       content: "",
       review: "",
+      characters: [],
       mentions: [],
       words: []
     };
@@ -31,6 +32,7 @@ class ViewBook extends React.Component {
         endDate,
         content,
         review,
+        characters = [],
         mentions = [],
         words = []
       } = res.data;
@@ -43,7 +45,8 @@ class ViewBook extends React.Component {
         bookId,
         review,
         mentions,
-        words
+        words,
+        characters
       });
     });
   }
