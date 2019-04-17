@@ -10,8 +10,7 @@ import {
   CardDeck
 } from "reactstrap";
 // import "./mindBokks.css";
-import axios from "axios";
-
+import { makeRequest } from "./../utils/request";
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -21,14 +20,13 @@ class Dashboard extends React.Component {
   }
   handleOpenBook(bookId) {}
   componentDidMount() {
-    axios
-      .get("https://mind-word-apis.herokuapp.com/books")
-      .then(res => {
-        this.setState({
-          books: res.data
-        });
-      })
-      .catch(() => {});
+    makeRequest("/books", {
+      method: "get"
+    }).then(res => {
+      this.setState({
+        books: res.data
+      });
+    });
   }
   render() {
     const books = (this.state.books.length > 0 &&

@@ -10,7 +10,7 @@ import {
   Input
 } from "reactstrap";
 
-import axios from "axios";
+import { makeRequest } from "./../../utils/request";
 
 class ImportantWords extends React.Component {
   constructor(props) {
@@ -38,12 +38,12 @@ class ImportantWords extends React.Component {
       pageNo: this.state.pageNo,
       context: this.state.context
     });
-    axios
-      .patch(
-        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
-        { words }
-      )
-      .then(() => this.setState({ openModal: false }));
+    makeRequest("/books/" + this.props.bookId, {
+      data: { ...this.props },
+      method: "put"
+    }).then(() => {
+      this.setState({ openModal: false });
+    });
   }
   render() {
     const words =

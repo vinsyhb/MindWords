@@ -9,8 +9,7 @@ import {
   Input,
   Label
 } from "reactstrap";
-import axios from "axios";
-
+import { makeRequest } from "../../utils/request";
 class Mentions extends React.Component {
   constructor(props) {
     super(props);
@@ -33,14 +32,12 @@ class Mentions extends React.Component {
       name: this.state.mentionName,
       link: this.state.mentionUrl
     });
-    axios
-      .patch(
-        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
-        { mentions }
-      )
-      .then(() => {
-        this.setState({ openModal: false });
-      });
+    makeRequest("/books/" + this.props.bookId, {
+      method: "put",
+      data: { ...this.props }
+    }).then(() => {
+      this.setState({ openModal: false });
+    });
   }
   toggleModal() {
     this.setState({ openModal: !this.state.openModal });

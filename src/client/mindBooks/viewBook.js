@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ViewHeader from "./view/header";
 import ViewBody from "./view/body";
+import { makeRequest } from "./../utils/request";
 
 class ViewBook extends React.Component {
   constructor(props) {
@@ -20,31 +21,31 @@ class ViewBook extends React.Component {
   componentDidMount() {
     const bookId = this.props.match.params.id;
     const that = this;
-    axios
-      .get("https://mind-word-apis.herokuapp.com/books/" + bookId)
-      .then(res => {
-        const {
-          bookName,
-          authorName,
-          startDate,
-          endDate,
-          content,
-          review,
-          mentions,
-          words
-        } = res.data;
-        that.setState({
-          bookName,
-          authorName,
-          startDate,
-          endDate,
-          content,
-          bookId,
-          review,
-          mentions,
-          words
-        });
+    makeRequest("/books/" + bookId, {
+      method: "get"
+    }).then(res => {
+      const {
+        bookName,
+        authorName,
+        startDate,
+        endDate,
+        content,
+        review,
+        mentions = [],
+        words = []
+      } = res.data;
+      that.setState({
+        bookName,
+        authorName,
+        startDate,
+        endDate,
+        content,
+        bookId,
+        review,
+        mentions,
+        words
       });
+    });
   }
   render() {
     return (

@@ -9,6 +9,7 @@ import {
   Input
 } from "reactstrap";
 import axios from "axios";
+import { makeRequest } from "../../utils/request";
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -35,17 +36,14 @@ class Reviews extends React.Component {
   }
   compo;
   handleAddReview(content) {
-    debugger;
-    axios
-      .patch(
-        "https://mind-word-apis.herokuapp.com/books/" + this.props.bookId,
-        {
-          review: this.state.reviewContent
-        }
-      )
-      .then(() => {
-        this.setState({ openModal: false });
-      });
+    let payLoad = { ...this.props };
+    payLoad.review = this.state.reviewContent;
+    makeRequest("/books/" + this.props.bookId, {
+      method: "put",
+      data: { ...payLoad }
+    }).then(() => {
+      this.setState({ openModal: false });
+    });
   }
   handleCancelReview() {
     this.setState({ openModal: false });

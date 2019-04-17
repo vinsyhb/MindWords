@@ -8,7 +8,7 @@ import {
   Spinner,
   Alert
 } from "reactstrap";
-import axios from "axios";
+import { makeRequest } from "./../utils/request";
 
 class AddBook extends React.Component {
   constructor(props) {
@@ -33,27 +33,25 @@ class AddBook extends React.Component {
 
   handleSubmit() {
     this.setState({ addingBook: true });
-    axios
-      .post("https://mind-word-apis.herokuapp.com/books", {
+    makeRequest("/books", {
+      data: {
         bookName: this.state.bookName,
         authorName: this.state.authorName,
         startDate: this.state.startDate,
         endDate: this.state.endDate
-      })
-      .then(respose => {
-        this.setState({
-          addSuccessfull: true,
-          addingBook: false,
-          bookName: "",
-          authorName: "",
-          startDate: "",
-          endDate: ""
-        });
-        setTimeout(() => this.setState({ addSuccessfull: false }), 2000);
-      })
-      .catch(respose => {
-        debugger;
+      },
+      method: "post"
+    }).then(() => {
+      this.setState({
+        addSuccessfull: true,
+        addingBook: false,
+        bookName: "",
+        authorName: "",
+        startDate: "",
+        endDate: ""
       });
+      setTimeout(() => this.setState({ addSuccessfull: false }), 2000);
+    });
   }
 
   render() {
